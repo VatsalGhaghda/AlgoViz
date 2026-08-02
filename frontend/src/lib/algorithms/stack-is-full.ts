@@ -1,11 +1,11 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const stackIsFullMeta: AlgorithmMeta = {
   id: "stack-is-full",
   name: "isFull",
   category: "Stacks",
   description: "Checks if the stack has reached its maximum capacity.",
-  timeComplexity: { best: "Ω(1)", average: "Θ(1)", worst: "O(1)" },
+  timeComplexity: { best: "Î©(1)", average: "Î˜(1)", worst: "O(1)" },
   spaceComplexity: "O(1)",
   language: "python",
   codeLines: [
@@ -46,9 +46,9 @@ export function generateStackIsFullSteps(): VisualizationStep[] {
     error = false,
     overrideVars: any = {}
   ) => {
-    const ptrs = [];
+    const ptrs: import("@/types/visualization").Pointer[] = [];
     if (top >= 0 && overrideVars.top !== "None") {
-      ptrs.push({ index: top, label: "top", color: "cyan" });
+      ptrs.push({ index: top, label: "top", color: "cyan" as const });
     }
 
     const currentVars = {

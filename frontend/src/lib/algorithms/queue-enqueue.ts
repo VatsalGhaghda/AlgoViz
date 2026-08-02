@@ -1,11 +1,11 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const queueEnqueueMeta: AlgorithmMeta = {
   id: "queue-enqueue",
   name: "Enqueue Sequence",
   category: "Queues",
   description: "Demonstrates enqueuing elements into a simple array-based queue until Queue Overflow occurs.",
-  timeComplexity: { best: "Ω(1)", average: "Θ(1)", worst: "O(1)" },
+  timeComplexity: { best: "Î©(1)", average: "Î˜(1)", worst: "O(1)" },
   spaceComplexity: "O(N)",
   language: "python",
   codeLines: [
@@ -60,12 +60,12 @@ export function generateQueueEnqueueSteps(): VisualizationStep[] {
     overrideVars: any = {}
   ) => {
     // Default pointers for front and rear
-    const ptrs = [];
+    const ptrs: import("@/types/visualization").Pointer[] = [];
     if (front >= 0 && overrideVars.front !== "None") {
-      ptrs.push({ index: front, label: "front", color: "cyan" });
+      ptrs.push({ index: front, label: "front", color: "cyan" as const });
     }
     if (rear >= 0 && overrideVars.rear !== "None") {
-      ptrs.push({ index: rear, label: "rear", color: "purple" });
+      ptrs.push({ index: rear, label: "rear", color: "purple" as const });
     }
 
     const currentVars = {

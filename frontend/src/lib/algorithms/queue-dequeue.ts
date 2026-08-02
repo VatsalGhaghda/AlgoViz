@@ -1,11 +1,11 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const queueDequeueMeta: AlgorithmMeta = {
   id: "queue-dequeue",
   name: "Dequeue Sequence",
   category: "Queues",
   description: "Demonstrates dequeuing elements from a simple array-based queue until Queue Underflow occurs.",
-  timeComplexity: { best: "Ω(1)", average: "Θ(1)", worst: "O(1)" },
+  timeComplexity: { best: "Î©(1)", average: "Î˜(1)", worst: "O(1)" },
   spaceComplexity: "O(1)",
   language: "python",
   codeLines: [
@@ -56,12 +56,12 @@ export function generateQueueDequeueSteps(): VisualizationStep[] {
     error = false,
     overrideVars: any = {}
   ) => {
-    const ptrs = [];
+    const ptrs: import("@/types/visualization").Pointer[] = [];
     if (front >= 0 && overrideVars.front !== "None") {
-      ptrs.push({ index: front, label: "front", color: "cyan" });
+      ptrs.push({ index: front, label: "front", color: "cyan" as const });
     }
     if (rear >= 0 && overrideVars.rear !== "None") {
-      ptrs.push({ index: rear, label: "rear", color: "purple" });
+      ptrs.push({ index: rear, label: "rear", color: "purple" as const });
     }
 
     const currentVars = {

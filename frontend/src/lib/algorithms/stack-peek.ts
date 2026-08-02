@@ -1,11 +1,11 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const stackPeekMeta: AlgorithmMeta = {
   id: "stack-peek",
   name: "Peek",
   category: "Stacks",
   description: "Demonstrates peeking at the top element without removing it.",
-  timeComplexity: { best: "Ω(1)", average: "Θ(1)", worst: "O(1)" },
+  timeComplexity: { best: "Î©(1)", average: "Î˜(1)", worst: "O(1)" },
   spaceComplexity: "O(1)",
   language: "python",
   codeLines: [
@@ -49,9 +49,9 @@ export function generateStackPeekSteps(): VisualizationStep[] {
     error = false,
     overrideVars: any = {}
   ) => {
-    const ptrs = [];
+    const ptrs: import("@/types/visualization").Pointer[] = [];
     if (top >= 0 && overrideVars.top !== "None") {
-      ptrs.push({ index: top, label: "top", color: "cyan" });
+      ptrs.push({ index: top, label: "top", color: "cyan" as const });
     }
 
     const currentVars = {

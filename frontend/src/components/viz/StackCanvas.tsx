@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { cn } from "@/lib/utils";
-import type { Pointer, VisualizationStep, AlgorithmMeta } from "@/types/visualization";
-import { ARRAY_LEGEND } from "./ArrayCanvas";
+import type { VisualizationStep, AlgorithmMeta } from "@/types/visualization";
 
 const STACK_BOX_WIDTH = 110;
 const STACK_BOX_HEIGHT = 42;
@@ -23,6 +21,7 @@ interface StackCanvasProps {
 }
 
 export function StackCanvas({ step, meta }: StackCanvasProps) {
+  void meta; // Unused but required by props
   const originalArrayRef = useRef<number[]>(step.data);
 
   if (step.data.length !== originalArrayRef.current.length) {
@@ -54,13 +53,13 @@ export function StackCanvas({ step, meta }: StackCanvasProps) {
     let text = "#a1a1aa"; 
 
     const state = step?.highlights?.[idx] || "idle";
-    const legendItem = ARRAY_LEGEND.find((l) => l.label.toLowerCase().includes(state));
+
 
     if (state === "error") {
       fill = "rgba(239,68,68,0.2)";
       stroke = "rgb(239,68,68)";
       text = "rgb(239,68,68)";
-    } else if (legendItem) {
+    } else if (state !== "idle") {
       if (state === "compare" || state === "key") {
         fill = "rgba(245,158,11,0.2)";
         stroke = "rgb(245,158,11)";
@@ -232,7 +231,7 @@ export function StackCanvas({ step, meta }: StackCanvasProps) {
                 <AnimatePresence mode="popLayout">
                   {arrayItems.map((item, i) => {
                     const x = arrayStartX + i * (ARRAY_BOX_SIZE + ARRAY_BOX_GAP);
-                    const y = baselineY - STACK_BOX_HEIGHT + STACK_BOX_HEIGHT; // Or align appropriately
+                    // const y = baselineY - STACK_BOX_HEIGHT + STACK_BOX_HEIGHT; // Or align appropriately
                     const style = getBoxStyle(item.idx);
 
                     return (

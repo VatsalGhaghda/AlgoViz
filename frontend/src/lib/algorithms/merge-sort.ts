@@ -1,4 +1,4 @@
-﻿import type { AlgorithmMeta, VisualizationStep, VariableValue, HighlightState } from "@/types/visualization";
+import type { AlgorithmMeta, VisualizationStep, HighlightState } from "@/types/visualization";
 import { buildHighlights } from "./utils";
 
 export const mergeSortMeta: AlgorithmMeta = {

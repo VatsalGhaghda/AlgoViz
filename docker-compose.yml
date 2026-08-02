@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      # Assuming a simple Dockerfile would be added later if needed, 
+      # but for local dev we typically run backend via `npm run dev`
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+    command: npm run dev
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/algovisualizer?schema=public
+      - EXECUTION_SERVICE_URL=http://execution-service:8000
+    depends_on:
+      - db
+      - execution-service
+
+  execution-service:
+    build:
+      context: ./execution-service
+    ports:
+      # Expose 8000 for local development only.
+      # In production, remove this port mapping so the service is internal-only.
+      - "8000:8000"
+    environment:
+      - SANDBOX_TIMEOUT_SECONDS=5
+      - SANDBOX_MAX_MEMORY_MB=128
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+          # Prevent memory swap (execution service should fail fast, not swap)
+        reservations:
+          memory: 64M
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: algovisualizer
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

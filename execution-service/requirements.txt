@@ -1,0 +1,14 @@
+# AlgoVisualizer Execution Service Dependencies
+#
+# Minimum versions that ship pre-built wheels for Python 3.14.
+# pydantic 2.3.0 requires building pydantic-core from Rust source (no 3.14 wheel).
+# pydantic >= 2.9.0 ships pre-built wheels for 3.14+.
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.9.0
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.24.0
+httpx2>=0.28.0          # Required for FastAPI TestClient (httpx deprecated in favor of httpx2)

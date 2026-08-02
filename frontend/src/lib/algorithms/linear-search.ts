@@ -1,4 +1,4 @@
-import type { AlgorithmMeta, VisualizationStep, VariableValue } from "@/types/visualization";
+import type { AlgorithmMeta, VisualizationStep } from "@/types/visualization";
 import { buildHighlights } from "./utils";
 
 export const linearSearchMeta: AlgorithmMeta = {
@@ -27,7 +27,6 @@ export function generateLinearSearchSteps(input: number[], userTarget?: number):
   let comparisons = 0;
   let visitedIndices = new Set<number>();
 
-  type Vars = Record<string, VariableValue>;
   const push = (step: Omit<VisualizationStep, "data">) =>
     steps.push({ ...step, data: [...arr] });
 
@@ -59,7 +58,6 @@ export function generateLinearSearchSteps(input: number[], userTarget?: number):
   let foundIdx = -1;
 
   for (let i = 0; i < n; i++) {
-    const passNum = i + 1;
     visitedIndices.add(i);
 
     push({

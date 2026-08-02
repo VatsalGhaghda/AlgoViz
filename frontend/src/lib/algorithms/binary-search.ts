@@ -1,4 +1,4 @@
-import type { AlgorithmMeta, VisualizationStep, VariableValue } from "@/types/visualization";
+import type { AlgorithmMeta, VisualizationStep } from "@/types/visualization";
 import { buildHighlights } from "./utils";
 
 export const binarySearchMeta: AlgorithmMeta = {
@@ -34,7 +34,6 @@ export function generateBinarySearchSteps(input: number[], userTarget?: number):
   let comparisons = 0;
   let passNum = 0;
 
-  type Vars = Record<string, VariableValue>;
   const push = (step: Omit<VisualizationStep, "data">) =>
     steps.push({ ...step, data: [...arr] });
 

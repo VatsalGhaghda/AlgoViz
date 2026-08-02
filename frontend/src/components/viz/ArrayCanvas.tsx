@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { cn } from "@/lib/utils";
-import type { Pointer, VisualizationStep, AlgorithmMeta } from "@/types/visualization";
+import type { VisualizationStep, AlgorithmMeta } from "@/types/visualization";
 
 const BOX_SIZE = 56;
 const BOX_GAP = 4;
@@ -19,6 +18,7 @@ interface ArrayCanvasProps {
 }
 
 export function ArrayCanvas({ step, meta }: ArrayCanvasProps) {
+  void meta; // Unused but required by props
   const originalArrayRef = useRef<number[]>(step.data);
 
   if (step.data.length !== originalArrayRef.current.length) {
@@ -27,13 +27,13 @@ export function ArrayCanvas({ step, meta }: ArrayCanvasProps) {
 
   const items = useMemo(() => {
     return step.data.map((v, idx) => {
-      const id = step.boxIds ? step.boxIds[idx] : String(idx);
-      return { value: v, id, idx };
+      const boxId = step.boxIds ? step.boxIds[idx] : String(idx);
+      return { value: v, id: boxId, idx };
     });
   }, [step.data, step.boxIds]);
 
   const totalContentWidth = items.length * BOX_SIZE + (items.length - 1) * BOX_GAP;
-  const getBoxStyle = (idx: number, id?: number | string) => {
+  const getBoxStyle = (idx: number) => {
     let fill = "transparent";
     let stroke = "rgba(255,255,255,0.2)";
     let text = "#a1a1aa"; // text-zinc-400

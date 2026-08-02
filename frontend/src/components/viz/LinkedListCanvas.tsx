@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { VisualizationStep, AlgorithmMeta } from "@/types/visualization";
@@ -15,6 +15,7 @@ interface LinkedListCanvasProps {
 }
 
 export function LinkedListCanvas({ step, meta }: LinkedListCanvasProps) {
+  void meta; // Unused but required by props
   // Read nodes and pointers from step.vars
   const nodes: { id: number; val: number; next: number | null, elevated?: boolean }[] = Array.isArray(step.vars?._nodes?.value) ? step.vars._nodes.value : [];
   

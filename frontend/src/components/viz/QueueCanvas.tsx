@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { cn } from "@/lib/utils";
-import type { Pointer, VisualizationStep, AlgorithmMeta } from "@/types/visualization";
-import { ARRAY_LEGEND } from "./ArrayCanvas";
+import type { VisualizationStep, AlgorithmMeta } from "@/types/visualization";
 
 const QUEUE_BOX_SIZE = 56;
 const QUEUE_BOX_GAP = 0; // Seamless pipe
@@ -22,6 +20,7 @@ interface QueueCanvasProps {
 }
 
 export function QueueCanvas({ step, meta }: QueueCanvasProps) {
+  void meta; // Unused but required by props
   const originalArrayRef = useRef<number[]>(step.data);
 
   if (step.data.length !== originalArrayRef.current.length) {
@@ -37,7 +36,7 @@ export function QueueCanvas({ step, meta }: QueueCanvasProps) {
   const capacity = typeof step.vars?.capacity?.value === 'number' ? step.vars.capacity.value : 5;
   const isArrCreated = step.vars?.arr?.value !== "None";
   const frontValue = typeof step.vars?.front?.value === 'number' ? step.vars.front.value : -1;
-  const rearValue = typeof step.vars?.rear?.value === 'number' ? step.vars.rear.value : -1;
+  void (typeof step.vars?.rear?.value === 'number' ? step.vars.rear.value : -1);
   
   const activeElements = items.filter(item => {
     if (frontValue === -1) return false;
@@ -59,7 +58,7 @@ export function QueueCanvas({ step, meta }: QueueCanvasProps) {
     let text = "#a1a1aa"; 
 
     const state = step?.highlights?.[idx] || "idle";
-    const legendItem = QUEUE_LEGEND.find((l) => l.label.toLowerCase().includes(state));
+    void (QUEUE_LEGEND.find((l) => l.label.toLowerCase().includes(state)));
 
     if (state === "error") {
       fill = "rgba(239,68,68,0.2)";
@@ -128,7 +127,7 @@ export function QueueCanvas({ step, meta }: QueueCanvasProps) {
             })}
 
             <AnimatePresence mode="popLayout">
-              {activeElements.map((item, i) => {
+              {activeElements.map((item) => {
                 const x = queueStartX + item.idx * (QUEUE_BOX_SIZE + QUEUE_BOX_GAP);
                 const style = getBoxStyle(item.idx);
                 
@@ -169,7 +168,7 @@ export function QueueCanvas({ step, meta }: QueueCanvasProps) {
 
             {/* Logical Pointers (Front / Rear) */}
             <AnimatePresence>
-              {[...activePointers].sort((a, b) => (a.label.toLowerCase() === 'front' ? -1 : 1)).map((p) => {
+              {[...activePointers].sort((a) => (a.label.toLowerCase() === 'front' ? -1 : 1)).map((p) => {
                 const x = queueStartX + (p.index as number) * (QUEUE_BOX_SIZE + QUEUE_BOX_GAP) + QUEUE_BOX_SIZE / 2;
                 const color = p.color === 'cyan' ? '#06b6d4' : (p.color === 'amber' ? '#facc15' : (p.color === 'emerald' ? '#10b981' : (p.color === 'purple' ? '#a855f7' : '#a1a1aa')));
                 

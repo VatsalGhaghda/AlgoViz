@@ -17,8 +17,7 @@ export function TopNav() {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const isLearnActive = location.pathname.startsWith("/learn");
-  const isPythonActive = location.pathname.startsWith("/python");
+
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b border-border bg-background/85 px-4 backdrop-blur-xl sm:px-6">

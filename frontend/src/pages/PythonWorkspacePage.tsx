@@ -31,7 +31,6 @@ import {
   ChevronUp,
   Clock,
   Code2,
-  Command,
   Cpu,
   Loader2,
   Pause,
@@ -429,7 +428,7 @@ function SidebarSlot({
 // ── Main component ────────────────────────────────────────────────────────────
 
 export function PythonWorkspacePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const snippetParam = searchParams.get("snippet");
   
   const [code, setCode] = useState(() => {
@@ -563,7 +562,7 @@ export function PythonWorkspacePage() {
   const activeErrorStep  = syntaxErrorStep ?? runtimeErrorStep ?? limitErrorStep;
   const showErrorBanner  = !!activeErrorStep && !errorDismissed;
   const apiErrorMsg      = error && !activeErrorStep ? error.message : null;
-  const isVirtualised    = steps.length > VIRT_THRESHOLD;
+  void (steps.length > VIRT_THRESHOLD); // isVirtualised — reserved for timeline virtualisation
 
   const consoleOutput = useMemo(
     () => steps.slice(0, playback.index + 1).map((s) => s.output).filter(Boolean).join(""),

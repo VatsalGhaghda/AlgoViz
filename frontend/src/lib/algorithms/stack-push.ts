@@ -56,9 +56,9 @@ export function generateStackPushSteps(): VisualizationStep[] {
     overrideVars: any = {}
   ) => {
     // Default pointer for top
-    const ptrs = [];
+    const ptrs: import("@/types/visualization").Pointer[] = [];
     if (top >= 0 && overrideVars.top !== "None") {
-      ptrs.push({ index: top, label: "top", color: "cyan" });
+      ptrs.push({ index: top, label: "top", color: "cyan" as const });
     }
 
     const currentVars = {

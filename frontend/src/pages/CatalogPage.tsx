@@ -13,7 +13,7 @@ export function CatalogPage() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border rounded-lg overflow-hidden">
-        {navSections.map((section, idx) => {
+        {navSections.map((section) => {
           // For now, consider a section "ready" if it has at least one ready item
           const readyCount = section.items.filter(i => i.status === "ready").length;
           const isReady = readyCount > 0;

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   BarChart2,
@@ -60,7 +60,7 @@ export function WorkspacePage() {
   const clampedIndex = Math.min(index, steps.length - 1);
   const step = steps[clampedIndex];
 
-  const hasError = steps.length === 1 && steps[0].description.includes("not valid");
+  void (steps.length === 1 && steps[0].description.includes("not valid")); // hasError — reserved
 
   useEffect(() => { 
     setIndex(0); 

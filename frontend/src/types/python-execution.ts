@@ -63,13 +63,14 @@ export interface ExecutionResponse {
 // ── Typed API error ──────────────────────────────────────────────────────────
 
 export class ExecutionApiError extends Error {
-  constructor(
-    message: string,
-    public readonly statusCode?: number,
-    public readonly detail?: unknown,
-  ) {
+  readonly statusCode: number | undefined;
+  readonly detail: unknown;
+
+  constructor(message: string, statusCode?: number, detail?: unknown) {
     super(message);
     this.name = "ExecutionApiError";
+    this.statusCode = statusCode;
+    this.detail = detail;
   }
 }
 

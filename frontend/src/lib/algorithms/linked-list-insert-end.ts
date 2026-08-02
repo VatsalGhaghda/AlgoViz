@@ -1,4 +1,4 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const linkedListInsertEndMeta: AlgorithmMeta = {
   id: "linked-list-insert-end",
@@ -6,8 +6,8 @@ export const linkedListInsertEndMeta: AlgorithmMeta = {
   category: "Linked List",
   description: "Inserts a new node at the end of a linked list.",
   timeComplexity: {
-    best: "Ω(n)",
-    average: "Θ(n)",
+    best: "Î©(n)",
+    average: "Î˜(n)",
     worst: "O(n)"
   },
   spaceComplexity: "O(1)",
@@ -125,7 +125,7 @@ export function generateLinkedListInsertEndSteps(input: number[], target?: numbe
   newNode = newNodeId;
   nodes.push({ id: newNode, val: targetVal, next: null });
   
-  push(2, `new_node = Node(${targetVal})`, `Checking if head is null.`, { [newNode]: "active" }, [
+  push(2, `new_node = Node(${targetVal})`, `Checking if head is null.`, { [newNode as number]: "active" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" }
   ]);
@@ -136,36 +136,36 @@ export function generateLinkedListInsertEndSteps(input: number[], target?: numbe
   ]);
 
   current = head;
-  push(5, `current = head`, `Beginning traversal.`, { [current]: "active" }, [
+  push(5, `current = head`, `Beginning traversal.`, { [current as number]: "active" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
 
-  while (nodes[current].next !== null) {
-    push(6, `while current.next:`, `current.next is not null.`, { [current]: "compare" }, [
+  while (nodes[current!].next !== null) {
+    push(6, `while current.next:`, `current.next is not null.`, { [current as number]: "compare" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "new_node", index: newNode, label: "new_node", color: "amber" },
       { id: "current", index: current, label: "current", color: "cyan" }
     ]);
-    current = nodes[current].next;
-    push(7, `current = current.next`, `Advancing current pointer.`, { [current]: "active" }, [
+    current = nodes[current!].next;
+    push(7, `current = current.next`, `Advancing current pointer.`, { [current as number]: "active" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "new_node", index: newNode, label: "new_node", color: "amber" },
       { id: "current", index: current, label: "current", color: "cyan" }
     ]);
   }
 
-  push(6, `while current.next:`, `Reached end of list.`, { [current]: "key" }, [
+  push(6, `while current.next:`, `Reached end of list.`, { [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
 
-  nodes[current].next = newNode;
+  nodes[current!].next = newNode;
   listArray.push(targetVal);
 
-  push(8, `current.next = new_node`, `Linked new node at the end.`, { [current]: "key", [newNode]: "found" }, [
+  push(8, `current.next = new_node`, `Linked new node at the end.`, { [current as number]: "key", [newNode as number]: "found" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current, label: "current", color: "cyan" }

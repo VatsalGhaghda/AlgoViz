@@ -1,4 +1,4 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const linkedListInsertPositionMeta: AlgorithmMeta = {
   id: "linked-list-insert-position",
@@ -6,8 +6,8 @@ export const linkedListInsertPositionMeta: AlgorithmMeta = {
   category: "Linked List",
   description: "Inserts a new node at a specific index in the linked list.",
   timeComplexity: {
-    best: "Ω(1)",
-    average: "Θ(n)",
+    best: "Î©(1)",
+    average: "Î˜(n)",
     worst: "O(n)"
   },
   spaceComplexity: "O(1)",
@@ -205,21 +205,21 @@ export function generateLinkedListInsertPositionSteps(input: number[], target?: 
   ]);
 
   current = head;
-  push(6, `current = head`, `Initializing traversal.`, { [current]: "active" }, [
+  push(6, `current = head`, `Initializing traversal.`, { [current as number]: "active" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
 
   for (let i = 0; i < pos - 1; i++) {
-    push(7, `for _ in range(pos - 1):`, `Checking if current is valid.`, { [current]: "compare" }, [
+    push(7, `for _ in range(pos - 1):`, `Checking if current is valid.`, { [current as number]: "compare" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "new_node", index: newNode, label: "new_node", color: "amber" },
       { id: "current", index: current, label: "current", color: "cyan" }
     ]);
 
     if (nodes.find(n => n.id === current)!.next === null) {
-      push(8, `if not current: break`, `Reached end of list early.`, { [current]: "key" }, [
+      push(8, `if not current: break`, `Reached end of list early.`, { [current as number]: "key" }, [
         { id: "head", index: head, label: "head", color: "emerald" },
         { id: "new_node", index: newNode, label: "new_node", color: "amber" },
         { id: "current", index: current, label: "current", color: "cyan" }
@@ -228,14 +228,14 @@ export function generateLinkedListInsertPositionSteps(input: number[], target?: 
     }
     
     current = nodes.find(n => n.id === current)!.next;
-    push(9, `current = current.next`, `Advancing current pointer.`, { [current!]: "active" }, [
+    push(9, `current = current.next`, `Advancing current pointer.`, { [current as number]: "active" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "new_node", index: newNode, label: "new_node", color: "amber" },
       { id: "current", index: current!, label: "current", color: "cyan" }
     ]);
   }
 
-  push(7, `for _ in range(pos - 1):`, `Loop finished.`, { [current!]: "key" }, [
+  push(7, `for _ in range(pos - 1):`, `Loop finished.`, { [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }
@@ -243,7 +243,7 @@ export function generateLinkedListInsertPositionSteps(input: number[], target?: 
 
   // Elevate first!
   nodes.find(n => n.id === newNode)!.elevated = true;
-  push(10, `new_node.next = current.next`, `Elevating new node before moving.`, { [newNode]: "active", [current!]: "key" }, [
+  push(10, `new_node.next = current.next`, `Elevating new node before moving.`, { [newNode]: "active", [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }
@@ -254,21 +254,21 @@ export function generateLinkedListInsertPositionSteps(input: number[], target?: 
   const currentIndexInArray = nodes.findIndex(n => n.id === current);
   nodes.splice(currentIndexInArray + 1, 0, newNodeObj);
 
-  push(10, `new_node.next = current.next`, `Gliding new node above the correct position.`, { [newNode]: "active", [current!]: "key" }, [
+  push(10, `new_node.next = current.next`, `Gliding new node above the correct position.`, { [newNode]: "active", [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }
   ]);
 
   nodes.find(n => n.id === newNode)!.next = nodes.find(n => n.id === current)!.next;
-  push(10, `new_node.next = current.next`, `Connecting newNode.next to the original next node.`, { [newNode]: "active", [current!]: "key" }, [
+  push(10, `new_node.next = current.next`, `Connecting newNode.next to the original next node.`, { [newNode]: "active", [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }
   ]);
 
   nodes.find(n => n.id === current)!.next = newNode;
-  push(11, `current.next = new_node`, `Redirecting current.next to the new node.`, { [current!]: "active", [newNode]: "found" }, [
+  push(11, `current.next = new_node`, `Redirecting current.next to the new node.`, { [current as number]: "active", [newNode]: "found" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }
@@ -278,7 +278,7 @@ export function generateLinkedListInsertPositionSteps(input: number[], target?: 
   // Drop it in
   nodes.find(n => n.id === newNode)!.elevated = false;
   
-  push(11, `current.next = new_node`, `Dropping new node into place.`, { [current!]: "active", [newNode]: "found" }, [
+  push(11, `current.next = new_node`, `Dropping new node into place.`, { [current as number]: "active", [newNode]: "found" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "new_node", index: newNode, label: "new_node", color: "amber" },
     { id: "current", index: current!, label: "current", color: "cyan" }

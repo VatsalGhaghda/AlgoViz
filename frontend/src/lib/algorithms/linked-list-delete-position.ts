@@ -1,4 +1,4 @@
-import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
+﻿import type { VisualizationStep, AlgorithmMeta, HighlightState } from "@/types/visualization";
 
 export const linkedListDeletePositionMeta: AlgorithmMeta = {
   id: "linked-list-delete-position",
@@ -6,8 +6,8 @@ export const linkedListDeletePositionMeta: AlgorithmMeta = {
   category: "Linked List",
   description: "Deletes a node at a specific index in the linked list.",
   timeComplexity: {
-    best: "Ω(1)",
-    average: "Θ(n)",
+    best: "Î©(1)",
+    average: "Î˜(n)",
     worst: "O(n)"
   },
   spaceComplexity: "O(1)",
@@ -137,20 +137,20 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
 
   if (pos === 0) {
     temp = head;
-    push(5, `temp = head`, `Storing old head in temp.`, { [temp]: "active" }, [
+    push(5, `temp = head`, `Storing old head in temp.`, { [temp as number]: "active" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "temp", index: temp, label: "temp", color: "amber" }
     ]);
 
     head = nodes[head].next;
-    push(6, `head = head.next`, `Advancing head.`, { [temp]: "key", ...(head !== null ? { [head]: "active" } : {}) }, [
+    push(6, `head = head.next`, `Advancing head.`, { [temp as number]: "key", ...(head !== null ? { [head]: "active" } : {}) }, [
       ...(head !== null ? [{ id: "head", index: head, label: "head", color: "emerald" }] : []),
       { id: "temp", index: temp, label: "temp", color: "amber" }
     ]);
 
-    nodes[temp].next = null;
+    nodes[temp!].next = null;
 
-    push(7, `temp.next = None`, `Severing the deleted node's next pointer.`, { [temp]: "error" }, [
+    push(7, `temp.next = None`, `Severing the deleted node's next pointer.`, { [temp as number]: "error" }, [
       ...(head !== null ? [{ id: "head", index: head, label: "head", color: "emerald" }] : []),
       { id: "temp", index: temp, label: "temp", color: "amber" }
     ]);
@@ -159,7 +159,7 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
 
     const deletedNode = temp;
     temp = null;
-    push(8, `del temp`, `Deleting old head.`, { [deletedNode]: "error" }, [
+    push(8, `del temp`, `Deleting old head.`, { [deletedNode as number]: "error" }, [
       ...(head !== null ? [{ id: "head", index: head, label: "head", color: "emerald" }] : [])
     ]);
 
@@ -171,20 +171,20 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
   }
 
   current = head;
-  push(9, `current = head`, `Initializing traversal.`, { [current]: "active" }, [
+  push(9, `current = head`, `Initializing traversal.`, { [current as number]: "active" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
 
   let i = 0;
   for (; i < pos - 1; i++) {
-    push(10, `for _ in range(pos - 1):`, `Checking if current.next is valid.`, { [current]: "compare" }, [
+    push(10, `for _ in range(pos - 1):`, `Checking if current.next is valid.`, { [current as number]: "compare" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "current", index: current, label: "current", color: "cyan" }
     ]);
 
     if (nodes[current].next === null) {
-      push(11, `if not current.next: break`, `Reached end of list early.`, { [current]: "key" }, [
+      push(11, `if not current.next: break`, `Reached end of list early.`, { [current as number]: "key" }, [
         { id: "head", index: head, label: "head", color: "emerald" },
         { id: "current", index: current, label: "current", color: "cyan" }
       ]);
@@ -192,18 +192,18 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
     }
     
     current = nodes[current].next;
-    push(12, `current = current.next`, `Advancing current pointer.`, { [current]: "active" }, [
+    push(12, `current = current.next`, `Advancing current pointer.`, { [current as number]: "active" }, [
       { id: "head", index: head, label: "head", color: "emerald" },
       { id: "current", index: current, label: "current", color: "cyan" }
     ]);
   }
 
-  push(10, `for _ in range(pos - 1):`, `Loop finished.`, { [current]: "key" }, [
+  push(10, `for _ in range(pos - 1):`, `Loop finished.`, { [current as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
 
-  push(13, `if not current.next:`, `Checking if target node exists.`, { [current]: "compare" }, [
+  push(13, `if not current.next:`, `Checking if target node exists.`, { [current as number]: "compare" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);
@@ -217,23 +217,23 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
   }
 
   temp = nodes[current].next;
-  push(14, `temp = current.next`, `Storing node to delete in temp.`, { [current]: "key", [temp]: "active" }, [
+  push(14, `temp = current.next`, `Storing node to delete in temp.`, { [current as number]: "key", [temp as number]: "active" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" },
     { id: "temp", index: temp, label: "temp", color: "amber" }
   ]);
 
-  nodes[current].next = nodes[temp].next;
+  nodes[current].next = nodes[temp!].next;
   listArray.splice(i + 1, 1);
   
-  push(15, `current.next = temp.next`, `Bypassing the node to delete.`, { [current]: "active", [temp]: "key" }, [
+  push(15, `current.next = temp.next`, `Bypassing the node to delete.`, { [current as number]: "active", [temp as number]: "key" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" },
     { id: "temp", index: temp, label: "temp", color: "amber" }
   ]);
 
-  nodes[temp].next = null;
-  push(16, `temp.next = None`, `Severing the deleted node's next pointer.`, { [temp]: "error" }, [
+  nodes[temp!].next = null;
+  push(16, `temp.next = None`, `Severing the deleted node's next pointer.`, { [temp as number]: "error" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" },
     { id: "temp", index: temp, label: "temp", color: "amber" }
@@ -242,7 +242,7 @@ export function generateLinkedListDeletePositionSteps(input: number[], target?: 
   nodes = nodes.filter((n) => n.id !== temp);
   const deletedNode = temp;
   temp = null;
-  push(17, `del temp`, `Deleting target node.`, { [deletedNode]: "error" }, [
+  push(17, `del temp`, `Deleting target node.`, { [deletedNode as number]: "error" }, [
     { id: "head", index: head, label: "head", color: "emerald" },
     { id: "current", index: current, label: "current", color: "cyan" }
   ]);

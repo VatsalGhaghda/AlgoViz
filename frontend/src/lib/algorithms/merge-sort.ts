@@ -1,4 +1,4 @@
-import type { AlgorithmMeta, VisualizationStep, VariableValue, HighlightState } from "@/types/visualization";
+﻿import type { AlgorithmMeta, VisualizationStep, VariableValue, HighlightState } from "@/types/visualization";
 import { buildHighlights } from "./utils";
 
 export const mergeSortMeta: AlgorithmMeta = {
@@ -7,7 +7,7 @@ export const mergeSortMeta: AlgorithmMeta = {
   category: "Sorting",
   description:
     "A divide and conquer algorithm that divides the array into halves, recursively sorts them, and merges the sorted halves.",
-  timeComplexity: { best: "Ω(n log n)", average: "Θ(n log n)", worst: "O(n log n)" },
+  timeComplexity: { best: "Î©(n log n)", average: "Î˜(n log n)", worst: "O(n log n)" },
   spaceComplexity: "O(n)",
   stable: true,
   language: "python",
@@ -53,7 +53,6 @@ export function generateMergeSortSteps(input: number[]): VisualizationStep[] {
   let copies = 0;
   let sortedIndices = new Set<number>();
 
-  type Vars = Record<string, VariableValue>;
   const push = (step: Omit<VisualizationStep, "data">) =>
     steps.push({ ...step, data: [...arr] });
 

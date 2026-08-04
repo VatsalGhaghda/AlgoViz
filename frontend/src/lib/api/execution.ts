@@ -8,7 +8,7 @@
 import type { ExecutionResponse } from "@/types/python-execution";
 import { ExecutionApiError } from "@/types/python-execution";
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "";
+const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
 const API_URL = `${API_BASE}/api/execute`;
 const MAX_CODE_BYTES = 50_000;
 const DEFAULT_TRACE_LIMIT = 10_000;

@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   BarChart2,
+  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  Copy,
   FileCode2,
   Variable,
 } from "lucide-react";
@@ -47,6 +49,7 @@ export function WorkspacePage() {
   const [targetStr, setTargetStr] = useState<string>("");
   const [valueStr, setValueStr] = useState<string>("99");
   const [index, setIndex] = useState(0);
+  const [codeCopied, setCodeCopied] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(5);
 
@@ -288,7 +291,21 @@ export function WorkspacePage() {
                       {meta.id.replace(/-/g, "_")}.{meta.language === "python" ? "py" : "ts"}
                     </span>
                   </div>
-                  <span className="eyebrow">{meta.language === "python" ? "Python" : "TypeScript"}</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      title="Copy code"
+                      onClick={() => {
+                        navigator.clipboard.writeText(meta.codeLines.join("\n"));
+                        setCodeCopied(true);
+                        setTimeout(() => setCodeCopied(false), 1500);
+                      }}
+                      className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-muted-foreground hover:bg-muted/60 hover:text-cyan-400 transition-colors"
+                    >
+                      {codeCopied ? <Check className="size-3 text-emerald-400" /> : <Copy className="size-3" />}
+                      {codeCopied ? "Copied!" : "Copy"}
+                    </button>
+                    <span className="eyebrow">{meta.language === "python" ? "Python" : "TypeScript"}</span>
+                  </div>
                 </div>
                 <CodePanel
                   code={meta.codeLines}

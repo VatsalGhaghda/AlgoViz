@@ -24,6 +24,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   BookOpen,
+  Check,
   CheckCircle2,
   ChevronDown,
   ChevronLeft,
@@ -31,6 +32,7 @@ import {
   ChevronUp,
   Clock,
   Code2,
+  Copy,
   Cpu,
   Loader2,
   Pause,
@@ -442,15 +444,18 @@ export function PythonWorkspacePage() {
   });
 
   // Watch for URL changes (e.g. from Search Modal navigation)
+  // Use a ref so editing the code doesn't retrigger the snippet reload
+  const loadedSnippetParamRef = useRef<string | null>(snippetParam);
   useEffect(() => {
-    if (snippetParam) {
+    if (snippetParam && snippetParam !== loadedSnippetParamRef.current) {
       const s = SNIPPETS.find((s) => s.id === snippetParam);
-      if (s && s.id !== activeSnippetId) {
+      if (s) {
         setCode(s.code);
         setActiveSnippetId(s.id);
+        loadedSnippetParamRef.current = snippetParam;
       }
     }
-  }, [snippetParam, activeSnippetId]);
+  }, [snippetParam]);
 
   const monacoRef  = useRef<MonacoEditorHandle>(null);
   const lastRunRef = useRef<number>(0);
@@ -462,6 +467,7 @@ export function PythonWorkspacePage() {
   const [sidebarOpen,    setSidebarOpen]    = useState(true);
   const [showPlayback,   setShowPlayback]   = useState(true);
   const [errorDismissed, setErrorDismissed] = useState(false);
+  const [codeCopied,     setCodeCopied]     = useState(false);
 
   // The bottom slot defaults to callstack but can be swapped to console
   const [bottomSlot, setBottomSlot] = useState<SidebarPanel>("callstack");
@@ -759,6 +765,18 @@ export function PythonWorkspacePage() {
                 >
                   <Trash2 className="size-3" />
                   Clear
+                </button>
+                <button
+                  title="Copy code"
+                  onClick={() => {
+                    navigator.clipboard.writeText(code);
+                    setCodeCopied(true);
+                    setTimeout(() => setCodeCopied(false), 1500);
+                  }}
+                  className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-muted-foreground hover:bg-muted/60 hover:text-cyan-400 transition-colors"
+                >
+                  {codeCopied ? <Check className="size-3 text-emerald-400" /> : <Copy className="size-3" />}
+                  {codeCopied ? "Copied!" : "Copy"}
                 </button>
                 <span className="eyebrow">Python 3</span>
               </div>

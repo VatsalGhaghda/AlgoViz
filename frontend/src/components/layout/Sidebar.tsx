@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ChevronRight, ChevronLeft } from "lucide-react";
+import { X, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { navSections } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { springs } from "@/lib/animation";
@@ -59,12 +59,10 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
                 />
                 <span className="eyebrow tracking-wider">{group.label}</span>
               </div>
-              <ChevronRight
-                className={cn(
-                  "size-3 text-muted-foreground transition-transform duration-200",
-                  expanded[group.label] && "rotate-90"
-                )}
-              />
+              {expanded[group.label]
+                ? <ChevronUp className="size-3 text-muted-foreground transition-transform duration-200" />
+                : <ChevronDown className="size-3 text-muted-foreground transition-transform duration-200" />
+              }
             </button>
             <AnimatePresence initial={false}>
               {expanded[group.label] && (

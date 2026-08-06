@@ -39,6 +39,7 @@ import {
   SkipBack,
   SkipForward,
   Terminal,
+  Trash2,
   Zap,
 } from "lucide-react";
 
@@ -746,6 +747,19 @@ export function PythonWorkspacePage() {
                     {status === "trace_limit_reached" && "Trace truncated"}
                   </span>
                 )}
+                <button
+                  title="Clear editor"
+                  onClick={() => {
+                    setCode("");
+                    setActiveSnippetId("");
+                    monacoRef.current?.clearHighlights();
+                    monacoRef.current?.clearErrorMarker();
+                  }}
+                  className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-muted-foreground hover:bg-muted/60 hover:text-rose-400 transition-colors"
+                >
+                  <Trash2 className="size-3" />
+                  Clear
+                </button>
                 <span className="eyebrow">Python 3</span>
               </div>
             }

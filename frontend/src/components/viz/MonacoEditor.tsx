@@ -186,6 +186,7 @@ export const MonacoEditor = forwardRef<MonacoEditorHandle, Props>(
           insertSpaces:         true,
           folding:              true,
           automaticLayout:      true,
+          stickyScroll:         { enabled: false },
         });
       },
       [readOnly],
@@ -213,6 +214,7 @@ export const MonacoEditor = forwardRef<MonacoEditorHandle, Props>(
           padding:         { top: 12, bottom: 12 },
           readOnly,
           automaticLayout: true,
+          stickyScroll:    { enabled: false },
         }}
       />
     );

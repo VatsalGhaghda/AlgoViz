@@ -45,7 +45,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <p className="eyebrow">Algorithms</p>
       </div>
 
-      <nav aria-label="Algorithms" className="flex-1 space-y-2 overflow-y-auto px-2 pb-4">
+      <nav aria-label="Algorithms" className="min-h-0 flex-1 space-y-2 overflow-y-auto px-2 pb-4 scrollbar-thin">
         {navSections.map((group, gi) => (
           <div key={group.label} className="flex flex-col">
             <button
@@ -137,9 +137,9 @@ export function Sidebar({ open, onToggle }: SidebarProps) {
             animate={{ width: 224, opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 400, damping: 40 }}
-            className="hidden shrink-0 overflow-hidden border-r border-sidebar-border lg:block"
+            className="hidden h-full shrink-0 overflow-hidden border-r border-sidebar-border lg:block"
           >
-            <div className="w-56">
+            <div className="h-full w-56">
               <SidebarContent />
             </div>
           </motion.aside>

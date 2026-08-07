@@ -201,12 +201,12 @@ function FeatureCard({
 }
 
 const READY_TOPICS = [
-  { slug: "bubble-sort", name: "Bubble Sort", complexity: "O(n²)", category: "Sorting" },
-  { slug: "merge-sort", name: "Merge Sort", complexity: "O(n log n)", category: "Sorting" },
-  { slug: "quick-sort", name: "Quick Sort", complexity: "O(n log n)", category: "Sorting" },
-  { slug: "array", name: "Array Operations", complexity: "O(n)", category: "Data Structures" },
-  { slug: "linked-list", name: "Linked List", complexity: "O(n)", category: "Data Structures" },
-  { slug: "bst", name: "Binary Search Tree", complexity: "O(log n)", category: "Data Structures" },
-  { slug: "bfs", name: "BFS", complexity: "O(V+E)", category: "Graph" },
-  { slug: "dfs", name: "DFS", complexity: "O(V+E)", category: "Graph" },
+  { slug: "sorting/bubble-sort",    name: "Bubble Sort",       complexity: "O(n²)",     category: "Sorting" },
+  { slug: "sorting/merge-sort",     name: "Merge Sort",        complexity: "O(n log n)", category: "Sorting" },
+  { slug: "sorting/quick-sort",     name: "Quick Sort",        complexity: "O(n log n)", category: "Sorting" },
+  { slug: "arrays/array-create",    name: "Array Operations",  complexity: "O(n)",      category: "Data Structures" },
+  { slug: "linked-list/create",     name: "Linked List",       complexity: "O(n)",      category: "Data Structures" },
+  { slug: "graphs/bfs",             name: "BFS",               complexity: "O(V+E)",    category: "Graph" },
+  { slug: "graphs/dfs",             name: "DFS",               complexity: "O(V+E)",    category: "Graph" },
+  { slug: "searching/binary-search",name: "Binary Search",     complexity: "O(log n)",  category: "Searching" },
 ];
